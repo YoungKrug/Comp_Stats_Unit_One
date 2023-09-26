@@ -2,7 +2,7 @@ library("ggplot2")
 library("grid")
 library("reshape2")
 
-sepsis_data <- read.table("dataset.csv",sep=",", header=TRUE)
+sepsis_data <- read.table("Dataset.csv",sep=",", header=TRUE)
 # header = True alows the first variables to be read as column variables
 # this allows us to actually properly superset ($)
 
@@ -27,6 +27,7 @@ frame <- data.frame(
   mean_arterial_pressure,
   respiration_rate
 )
+
 #print(frame)
 #print(summary(frame))
 
@@ -39,13 +40,51 @@ frame <- data.frame(
 #   geom_point()
 # print(plot2)
 
-heart_rate.anova <- oneway.test(heart_rate~time_eclisped)
-systolic_blood_pressure.anova <- oneway.test(systolic_blood_pressure~time_eclisped)
-mean_arterial_pressure.anova <- oneway.test(mean_arterial_pressure~time_eclisped)
-respiration_rate.anova <- oneway.test(respiration_rate~time_eclisped)
-print(heart_rate.anova)
-print(systolic_blood_pressure.anova)
-print(mean_arterial_pressure.anova)
-print(respiration_rate.anova)
+heart_rate.melt = melt(heart_rate)
+time_eclisped.melt <- melt(time_eclisped)
+heart_rate.anova = oneway.test(heart_rate~time_eclisped)
+print(melt(heart_rate.anova))
+systolic_blood_pressure.anova = oneway.test(systolic_blood_pressure~time_eclisped)
+mean_arterial_pressure.anova = oneway.test(mean_arterial_pressure~time_eclisped)
+respiration_rate.anova= oneway.test(respiration_rate~time_eclisped)
 
-# pairwise.t.test(heart_rate~time_eclisped, )
+heart_rate.sd <- sd(heart_rate)
+systolic_blood_pressure.sd <- sd(systolic_blood_pressure)
+mean_arterial_pressure.sd <- sd(mean_arterial_pressure)
+respiration_rate.sd <- sd(respiration_rate)
+
+standard_deviations <- c(heart_rate.sd, mean_arterial_pressure.sd,
+                         respiration_rate.sd, mean_arterial_pressure.sd)
+
+
+data_anova <- c(heart_rate.anova, systolic_blood_pressure.anova,
+          mean_arterial_pressure.anova, respiration_rate.anova)
+
+data.anova <- data.frame(
+  name <- letters[1: length(data_anova)],
+  value <- data_anova,
+  sd <- standard_deviations
+)
+
+ggplot(data.anova) +
+    geom_bar( aes(x=name, y=value), stat="identity", fill="skyblue", alpha=0.7) +
+    geom_errorbar( aes(x=name, ymin=value-sd, ymax=value+sd), width=0.4, colour="orange", alpha=0.9, linewidth=1.3)
+
+
+sink("T-Testdata.txt")
+pairwise <- pairwise.t.test(heart_rate, mean_arterial_pressure)
+bonferroni <- pairwise.t.test(heart_rate, mean_arterial_pressure, p.adjust.method = "bonferroni")
+hochberg <- pairwise.t.test(heart_rate, mean_arterial_pressure, p.adjust.method = "hochberg")
+print(pairwise)
+print(bonferroni)
+print(hochberg)
+unsink()
+
+
+data.new <- melt(sepsis_data)
+# print(heart_rate.anova)
+# print(systolic_blood_pressure.anova)
+# print(mean_arterial_pressure.anova)
+# print(respiration_rate.anova)
+#pairwise.t.test(heart_rate~time_eclisped, )
+print(data.new)
