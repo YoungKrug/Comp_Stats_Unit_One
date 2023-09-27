@@ -2,7 +2,7 @@ library("ggplot2")
 library("grid")
 library("reshape2")
 
-sepsis_data <- read.table("Dataset.csv",sep=",", header=TRUE)
+sepsis_data <- read.table("Comp_Stats_Unit_One/Main/Dataset.csv",sep=",", header=TRUE)
 # header = True alows the first variables to be read as column variables
 # this allows us to actually properly superset ($)
 
