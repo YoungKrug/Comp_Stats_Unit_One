@@ -21,13 +21,13 @@ DataReader <- R6Class("DataReader",
     },
     Get_Data_Frame = function(header)
     {
+      values =  self$list_of_column_data[header]
       data_frame <- data.frame(
-        self$list_of_column_data[header]
+       data = values
       )
       return(data_frame)
     }
   )
 )
 
-# data <- DataReader$new("Comp_Stats_Unit_One/Main/Dataset.csv") This is how you create objects
-
+# data <- DataReader$new("Comp_Stats_Unit_One/Main/Dataset.csv") #This is how you create objects
