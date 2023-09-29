@@ -6,15 +6,12 @@ set.seed(NULL)
 distrubtion <- rnorm(5000, 40, 20)
 range <- rnorm(5000)
 #print(distrubtion)
-
 framed_data <- data.frame(
   distrubtion
 )
-
 histogram <- hist(framed_data$distrubtion,
      probability = TRUE,
 )
-
 # Lines funtion needs to be separate
 lines <- lines(density(framed_data$distrubtion))
 # print(histogram)
