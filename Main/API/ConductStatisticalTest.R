@@ -91,8 +91,8 @@ public = list(
             newKey = paste(xKey, yKey, sep = self$dict_sep)
             t_val = pairwise.t.test(xValue, yValue, p.adjust.method = test_variation)
             list_of_t_test[[newKey]] = t_val
-           print(newKey)
-           print(t_val)
+         #  print(newKey)
+           #Wprint(t_val)
          }
       }
       self$list_of_t_test = list_of_t_test
@@ -162,6 +162,31 @@ public = list(
        ks_test = ks.test(first_value, other_value, method=type_of_correlation, exact = FALSE)
       unlink(file_name)
       return(ks_test)
+    },
+    conduct_linear_regression  = function(first = NA, other = NA, data = NULL)
+    {
+      list_values = self$data_reader$list_of_column_data
+      first_value = list_values[[first]]
+      other_value = list_values[[other]]
+      if(is.null(data))
+        linear_regression = lm(first_value~other_value)
+      else
+      {
+        framed_data = data.frame(
+          data
+        )
+         linear_regression = lm(first_value~other_value, data=framed_data)
+      }
+      print(linear_regression)
+    },
+      conduct_manova  = function(first = NA, second = NA, other = NA)
+    {
+      list_values = self$data_reader$list_of_column_data
+      first_value = list_values[[first]]
+      second_value = list_values[[second]]
+      other_value = list_values[[other]]
+      manova_data = manova(cbind(first_value,second_value)~other_value)
+      print(manova_data)
     }
   )
 )
