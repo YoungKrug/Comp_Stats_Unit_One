@@ -1,5 +1,10 @@
 
 library("R6")
+# This class will take the data reader, read the information and construct a data analyzer.
+# This will save simple data such as mean and sd, and allow you to cnduct statistical methods such as,
+# T-Test,  KS, Manovas, AnCovas, linear regression, etc...
+#TODO** need to construct functions that allow users to send the function they want to conduct on the data
+#TODO** and allow for parameters to be sent along with the data...might need to make a wrapper class..
 DataAnalyzer <- R6Class("DataAnalyzer",
 public = list(
     data_reader = NULL,
@@ -27,11 +32,8 @@ public = list(
     },
     conduct_oneway_anovas = function(restricted_to_keys = NA, save = FALSE)
     {
+      # Conduct oneway anovas on all data types, and saves the data.
       dict_keys = self$dictonary_keys
-      # if(restricted_to_keys != NULL)
-      # {
-      #   dict_keys = restricted_to_keys
-      # }
       file_name = "Output_data/anova_data_all"
        if(save == TRUE)
       {
@@ -58,6 +60,7 @@ public = list(
     },
     conduct_one_way_anova_on = function(first = NA, other = NA, save = FALSE)
     {
+      #construct one way anovas on declared functions in params
       names = paste(first, other, sep = "_")
       file_name = paste("Output_data/anova_data", names, sep = "_")
        if(save == TRUE)
@@ -72,6 +75,7 @@ public = list(
     },
     conduct_t_test_on_all = function(test_variation = NA, save = FALSE)
     {
+      # Construct T-Test on all columns
       file_name = "Output_data/anova_data"
        if(save == TRUE)
       {

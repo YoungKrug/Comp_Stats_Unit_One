@@ -1,3 +1,4 @@
+#Takes the csv/tsv file, reads it and constructs list of data related to the file.
 library("R6")
 DataReader <- R6Class("DataReader",
   public = list(
