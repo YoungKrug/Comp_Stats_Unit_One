@@ -18,3 +18,32 @@ Coefficients:
 (Intercept)  other_value  
    -24.1751       0.5339  
 
+Call:
+   manova(cbind(first_value, second_value) ~ other_value)
+
+Terms:
+                other_value Residuals
+first_value          6756.8  621378.0
+second_value          230.1  205559.6
+Deg. of Freedom           1      2124
+
+Residual standard errors: 17.10412 9.837657
+Estimated effects may be unbalanced
+
+Call:
+lm(formula = first_value ~ other_value, data = framed_data)
+
+Coefficients:
+(Intercept)  other_value  
+   -24.1751       0.5339  
+
+Call:
+   aov(formula = fetal_health ~ CompVal)
+
+Terms:
+                 CompVal Residuals
+Sum of Squares  168.3246  633.7756
+Deg. of Freedom        1      2124
+
+Residual standard error: 0.5462488
+Estimated effects may be unbalanced

@@ -6,10 +6,10 @@ DataReader <- R6Class("DataReader",
     data = NULL,
     list_of_column_data = NULL,
     col_names = NULL,
-    initialize = function(databasePath = NA)
+    initialize = function(databasePath = NA, seperator = ",")
     {
       self$database_path = databasePath
-      self$data = read.table(databasePath,sep=",", header=TRUE)
+      self$data = read.table(databasePath,sep=seperator, header=TRUE)
       list_of_column_data = list()
       col_names = colnames(self$data)
       for(index in 1:length(col_names))
