@@ -1,6 +1,6 @@
 
 library("ggplot2")
-covid_data <- read.csv("Comp_Stats_Unit_One/Main/Dataset/covid_data_log_200908.csv", header=TRUE)
+covid_data <- read.csv("Dataset/covid_data_log_200908.csv", header=TRUE)
 state <- covid_data$State
 cases <- covid_data$Cases
 deaths <- covid_data$Deaths

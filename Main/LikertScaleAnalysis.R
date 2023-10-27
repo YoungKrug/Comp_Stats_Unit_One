@@ -1,7 +1,7 @@
 library('HH')
 library("psych")
 library("dplyr")
-iris_purchase_csv = read.csv("Comp_Stats_Unit_One/Main/corrupted-extended_iris_data_sets/iris_csv_purchase.csv", header=TRUE)
+iris_purchase_csv = read.csv("corrupted-extended_iris_data_sets/iris_csv_purchase.csv", header=TRUE)
 iris_species = iris_purchase_csv$species
 iris_likely_to_buy = iris_purchase_csv$likelytobuy
 iris_color = iris_purchase_csv$color

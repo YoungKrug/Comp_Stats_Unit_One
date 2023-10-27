@@ -1,5 +1,5 @@
-library(psych)
-fetal_health_data <- read.csv("Comp_Stats_Unit_One/Main/Dataset/fetal_health.csv", header=TRUE)
+library("psych")
+fetal_health_data <- read.csv("Dataset/fetal_health.csv", header=TRUE)
 
 abnormal_stv <- fetal_health_data$abnormal_short_term_variability
 fetal_movement <- fetal_health_data$fetal_movement

@@ -19,11 +19,12 @@ public = list(
       list_of_mean = list()
       list_of_std = list()
       self$data_reader = dataReader
+      # print(names(dataReader$list_of_column_data))
       dictonary_keys = names(dataReader$list_of_column_data)
       for(key in dictonary_keys)
       {
-          list_of_mean[[key]] = mean(self$data_reader[[key]])
-          list_of_std[[key]] = sd(self$data_reader[[key]])
+          # list_of_mean[[key]] = mean(self$data_reader[[key]])
+          # list_of_std[[key]] = sd(self$data_reader[[key]])
       }
       self$dictonary_keys = dictonary_keys
       self$list_of_mean = list_of_mean
