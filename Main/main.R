@@ -1,3 +1,4 @@
+# GregoryJohnson_unit1_BIOL672.r
 library("ggplot2")
 library("reshape2")
 
@@ -6,19 +7,16 @@ set.seed(NULL)
 distrubtion <- rnorm(5000, 40, 20)
 range <- rnorm(5000)
 #print(distrubtion)
-
 framed_data <- data.frame(
   distrubtion
 )
-
 histogram <- hist(framed_data$distrubtion,
      probability = TRUE,
 )
-
 # Lines funtion needs to be separate
 lines <- lines(density(framed_data$distrubtion))
-# print(histogram)
-# print(lines)
+print(histogram)
+print(lines)
 
 
 sink("desc.txt")
@@ -30,20 +28,19 @@ distrubtion.sd <- sd(distrubtion)
 sprintf("mean %f",  distrubtion.mean)
 sprintf("standard deviation %f", distrubtion.sd)
 sink()
-
-matrix_distribution <- matrix(distrubtion)
-print(matrix_distribution)
-y <- apply(matrix_distribution, 2, mean)
-print(y)
-y.sd <- apply(matrix_distribution, 2, sd)
-print(y.sd)
-mid <- barplot(y)
-
-data.frame(
-  name <- range,
-  value <- 10,
-  sd <- standard_deviations
-)
+#
+# matrix_distribution <- matrix(distrubtion)
+# y <- apply(matrix_distribution, 2, mean)
+# print(y)
+# y.sd <- apply(matrix_distribution, 2, sd)
+# print(y.sd)
+# mid <- barplot(y)
+#
+# data.frame(
+#   name <- range,
+#   value <- 10,
+#   sd <- distrubtion.sd
+# )
 
 
 

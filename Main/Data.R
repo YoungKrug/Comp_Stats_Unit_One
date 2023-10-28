@@ -2,10 +2,11 @@ library("ggplot2")
 library("grid")
 library("reshape2")
 
-sepsis_data <- read.table("Dataset.csv",sep=",", header=TRUE)
+fetal_data <- read.table("Comp_Stats_Unit_One/Main/Dataset/fetal_health.csv",sep=",", header=TRUE)
+sepsis_data <- read.table("Comp_Stats_Unit_One/Main/Dataset.csv",sep=",", header=TRUE)
 # header = True alows the first variables to be read as column variables
 # this allows us to actually properly superset ($)
-
+pt_id <- sepsis_data$Patient_ID
 time_eclisped <- sepsis_data$Hour
 heart_rate <- sepsis_data$HR
 oxygen_saturation <- sepsis_data$O2Sat
@@ -42,11 +43,10 @@ frame <- data.frame(
 
 heart_rate.melt = melt(heart_rate)
 time_eclisped.melt <- melt(time_eclisped)
-heart_rate.anova = oneway.test(heart_rate~time_eclisped)
-print(melt(heart_rate.anova))
-systolic_blood_pressure.anova = oneway.test(systolic_blood_pressure~time_eclisped)
-mean_arterial_pressure.anova = oneway.test(mean_arterial_pressure~time_eclisped)
-respiration_rate.anova= oneway.test(respiration_rate~time_eclisped)
+heart_rate.anova = oneway.test(heart_rate~Hour)
+systolic_blood_pressure.anova = oneway.test(systolic_blood_pressure~Hour)
+mean_arterial_pressure.anova = oneway.test(mean_arterial_pressure~Hour)
+respiration_rate.anova= oneway.test(respiration_rate~Hour)
 
 heart_rate.sd <- sd(heart_rate)
 systolic_blood_pressure.sd <- sd(systolic_blood_pressure)

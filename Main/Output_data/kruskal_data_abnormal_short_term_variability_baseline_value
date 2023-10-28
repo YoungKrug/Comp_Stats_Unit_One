@@ -1,0 +1,6 @@
+
+	Kruskal-Wallis rank sum test
+
+data:  first_value by other_value
+Kruskal-Wallis chi-squared = 671.14, df = 47, p-value < 2.2e-16
+

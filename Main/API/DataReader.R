@@ -1,28 +1,34 @@
+#Takes the csv/tsv file, reads it and constructs list of data related to the file.
 library("R6")
-
-
 DataReader <- R6Class("DataReader",
   public = list(
     database_path = NULL,
     data = NULL,
     list_of_column_data = NULL,
     col_names = NULL,
-    initialize = function(databasePath = NA) {
+    initialize = function(databasePath = NA, seperator = ",")
+    {
       self$database_path = databasePath
+      self$data = read.table(databasePath,sep=seperator, header=TRUE)
       list_of_column_data = list()
-      self$data = read.table("Dataset.csv",sep=",", header=TRUE)
-      col_names = colnames(data)
+      col_names = colnames(self$data)
       for(index in 1:length(col_names))
       {
-        columnName = col_names[index]
-        list_of_column_data[columnName] = data[,columnName]
+        column = col_names[index]
+        list_of_column_data[[column]] = self$data[,column]
       }
-      self$col_names = col_names
       self$list_of_column_data = list_of_column_data
-      print(list_of_column_data)
+      self$col_names = col_names
+    },
+    Get_Data_Frame = function(header)
+    {
+      values =  self$list_of_column_data[header]
+      data_frame <- data.frame(
+       data = values
+      )
+      return(data_frame)
     }
   )
 )
 
-Data <- DataReader$new("Dataset.csv")
-print(Data$list_of_column_data)
+# data <- DataReader$new("Comp_Stats_Unit_One/Main/Dataset.csv") #This is how you create objects
